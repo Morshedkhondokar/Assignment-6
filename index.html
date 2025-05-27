@@ -3,15 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peddy</title>
+    <link rel="icon" type="image/x-icon" href="images/logo.webp">
+    <title>Peddy || Home</title>
     <!-- css link -->
      <link rel="stylesheet" href="style.css">
      <!-- tailwind css and daisy UI cdn  -->
       <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
       <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+      <!-- Font Awesome CDN -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    
+    <header class="w-11/12 mx-auto my-3 md:my-5">
+        <!-- nav section -->
+        <nav class="flex justify-between items-center mb-4 md:mb-10">
+            <!-- logo -->
+            <div class="flex gap-2 items-center">
+                <div class="w-7"><img src="images/logo.webp" alt=""></div>
+                <h1 class="font-bold text-[30px]">Peddy</h1>
+            </div>
+            <!-- menu -->
+            <div class="hidden md:block">
+                <ul class="flex gap-8 text-[rgba(19,19,19,0.6)] mr-[90px] font-bold">
+                    <li>Home</li>
+                    <li>Shop</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <!-- user icon -->
+            <div class=" border border-[rgba(19,19,19,0.6)] rounded-full hidden md:block">
+                <i class="fas fa-user p-3 text-[rgba(19,19,19,0.6)]"></i>
+            </div>
+            <!-- bar icon -->
+            <div class=" border border-[rgba(19,19,19,0.6)] rounded-full md:hidden">
+                <i class="fas fa-bars p-3 text-[rgba(19,19,19,0.6)]"></i>
+            </div>
+        </nav>
+
+        <!-- banner section -->
+         <section>
+            <!-- text -->
+            <div class="text-center">
+                <div class="md:w-10/12 lg:w-7/12 mx-auto mb-6">
+                    <h4><span class="text-[rgba(19,19,19,0.6)] font-semibold">Bringing Families Togeth</span> 💖</h4>
+                <h1 class="font-bold text-[40px] md:text-[60px] mb-5">Your Path to Adoption <br> Starts Here</h1>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+                </div>
+                <button class="btn bg-[#0E7A81] text-white rounded-xl px-8 py-4">View More</button>
+            </div>
+            <!-- image -->
+            <div class="md:w-10/12 lg:w-7/12 mx-auto mt-10">
+                <img src="images/pet.webp" alt="">
+            </div>
+         </section>
+    </header>
 
     <script src="js/pet.js"></script>
 </body>
