@@ -49,8 +49,8 @@
                 <h1 class="font-bold text-[40px] md:text-[60px] mb-5">Your Path to Adoption <br> Starts Here</h1>
                 <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
                 </div>
-                
-                <a href="#categores_btn"><button class="btn bg-[#0E7A81] text-white rounded-xl px-8 py-4">View More</button></a>
+                <button class="btn bg-[#0E7A81] text-white rounded-xl px-8 py-4">View More</button>
+                <!-- <a href="#categores_btn"></a> -->
             </div>
             <!-- image -->
             <div class="md:w-10/12 lg:w-7/12 mx-auto mt-10">
@@ -67,7 +67,7 @@
             <p class="md:w-7/12 mx-auto text-center mb-10 mt-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
             <!-- create categores_btn by js-4-->
             <div id="categores_btn" class="grid grid-cols-2 gap-5 justify-items-center
-            md:flex justify-between scroll-mt-8"></div>
+            md:flex justify-between"></div>
         </div>
         
         <!-- title  -->
@@ -80,10 +80,25 @@
             <!-- show all pets on display -->
             <div  id="petDesplay" class="w-9/11 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
             <!-- ///////////favourite pets \\\\\\\\\\\\\\\\-->
-            <div id="favourites_pet" class="border border-[#e7e7e7] rounded-xl w-3/11 grid grid-cols-1 lg:grid-cols-2"></div>
+            <div id="favourites_pet" class="border border-[#e7e7e7] rounded-xl w-3/11 grid justify-start items-start
+            "></div>
         </div>
 
      </main>
+
+     <!-- Open the modal using ID.showModal() method -->
+<button id="displayDetails" class="btn hidden" onclick="customMOdal.showModal()">open modal</button>
+<dialog id="customMOdal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <div id="modalContent"></div>
+    <div class="modal-action block"> 
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn w-full bg-[#e7f2f2] border border-[#bcdadb] text-[#0e7a81]">Close</button>
+      </form>
+    </div>
+  </div> 
+</dialog>
 
      <!--/////////////// footer \\\\\\\\\\\\\\\\\\\-->
       <footer class="footer sm:footer-horizontal bg-black justify-between p-10 text-white">

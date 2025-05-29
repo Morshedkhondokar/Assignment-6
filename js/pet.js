@@ -56,28 +56,98 @@ const displayPets = (pets) => {
          <div class="border border-[#e7e7e7] my-3"></div>
 
          <div class="flex justify-between">
-         <button class="w-10 h-8 btn border border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white"> <i class="fas fa-thumbs-up text-gray-300 hover:text-white text-[20px]"></i></button>
+         <button onclick="petsID(${pet.petId})" class="w-10 h-8 btn border border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white"> <i class="fas fa-thumbs-up text-gray-300 hover:text-white text-[20px]"></i></button>
          <button class="h-8 btn border text-[#0e7a81] border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white">Adopt</button>
-         <button class="h-8 btn border text-[#0e7a81] border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white">Details </button>
+         <button onclick="ShowDetails(${pet.petId})" class="h-8 btn border text-[#0e7a81] border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white">Details </button>
          </div>
         `
         petsContainer.appendChild(div)
     })
 }
 
+const ShowDetails =(details) => {
+    // console.log(details)
+    fetch(`https://openapi.programming-hero.com/api/peddy/pet/${details}`)
+.then((res) => res.json())
+.then((data) => ShowDetailsOnDesplay(data.petData))
+.catch((error)=> console.log(error))
 
+}
+
+const ShowDetailsOnDesplay = (petDetails) =>{
+    // console.log(petDetails.pet_details)
+    const detailsContainer = document.getElementById("modalContent");
+
+    detailsContainer.innerHTML = `
+    <img class="w-full rounded-xl" src="${petDetails.image}" />
+
+    <h1 class="font-bold text-2xl my-4">${petDetails.pet_name} </h1>
+    <div class="md:flex gap-5 mb-5"> 
+        <div> 
+            <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-paw text-2xl"></i> Breed: ${petDetails.vaccinated_status}</h5>
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-calendar-alt text-2xl"></i> Birth: ${petDetails.bdate_of_birth} </h5>
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mars text-2xl"></i> Gender: ${petDetails.gender}</h5> 
+        </div>
+
+        <div> 
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class=" text-[15px] mr-2 fas fa-syringe text-2xl"></i>
+ Gender: ${petDetails.vaccinated_status}</h5> 
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-dollar-sign text-2xl"></i> Price: ${petDetails.price}$</h5> 
+        </div>
+         </div> 
+
+         <hr>
+
+         <div class="mt-5">
+         <h1 class="font-semibold mb-3">Details Information</h1>
+         <p class="text-[#5a5a5a]">  ${petDetails.pet_details}</p>
+         </div>
+
+    `
+
+
+    document.getElementById("displayDetails").click();
+}
+
+// pets image create start
+const petsID = (id) => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
+.then((res) => res.json())
+.then((data) => favouritesPets(data.petData))
+.catch((error)=> console.log(error))
+}
+
+const favouritesPets = (data) => {
+    // console.log(data.pet_details)
+
+    const favouritesPetsContainer = document.getElementById("favourites_pet")
+    const div = document.createElement('div');
+    div.classList = "h-[50px] md:h-[124px]"
+    div.innerHTML = `
+    <div class=" overflow-hidden p-2">
+    <img class="rounded-xl" src="${data.image}"/>
+    </div>
+    `
+    favouritesPetsContainer.appendChild(div)
+}
+// pets image create end
  
 
 const demo = {
-    "petId": 3,
-    "category": "Rabbit",
-    "date_of_birth": "2022-04-20",
-    "price": 1500,
-    "image": "https://i.ibb.co.com/s3PXSwD/pet-3.jpg",
-    "gender": "Male",
-    "pet_details": "This male African Grey rabbit is a small, friendly companion born on April 20, 2022. He prefers a calm environment and enjoys gentle handling. Partially vaccinated, he's a great choice for rabbit lovers who want a peaceful, easygoing pet. Priced at $1500, he's perfect for a quiet home environment.",
-    "vaccinated_status": "Partially",
-    "pet_name": "Coco"
+  "status": true,
+  "message": "successfully fetched pet data using id 10",
+  "petData": {
+    "petId": 10,
+    "breed": "Labrador Retriever",
+    "category": "Dog",
+    "date_of_birth": "2023-05-15",
+    "price": 1100,
+    "image": "https://i.ibb.co.com/hg9XBJV/pet-10.jpg",
+    "gender": "Female",
+    "pet_details": "This cheerful female Labrador is a playful bundle of joy. Born on May 15, 2023, she loves water and outdoor activities. Fully vaccinated and priced at $1100, she's perfect for families who enjoy active lifestyles.",
+    "vaccinated_status": "Fully",
+    "pet_name": "Daisy"
+  }
 }
 
 
@@ -108,6 +178,7 @@ function displayCategories(categories) {
     });   
 }
 
+// active calss
 const show = ( (num)=> {
     // alert(num)
      console.log(num)
@@ -124,6 +195,7 @@ const show = ( (num)=> {
 .catch((error)=> console.log(error))
 })
 
+// class remove
 const removeClass = () =>{
     const buttons = document.getElementsByClassName("remove-active");
     for (let btn of buttons) {
