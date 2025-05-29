@@ -65,8 +65,12 @@
             <h2 class="text-4xl font-bold text-center">Adopt  Your  Best Friend</h2>
             <p class="md:w-7/12 mx-auto text-center mb-10 mt-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
             <!-- create categores_btn by js-4-->
+             
+
             <div id="categores_btn" class="grid grid-cols-2 gap-5 justify-items-center
-            md:flex justify-between"></div>
+            md:flex justify-between">
+               
+            </div>
         </div>
         
         <!-- title  -->
@@ -77,10 +81,16 @@
 
         <div  class="flex gap-2 my-10"> 
             <!-- show all pets on display -->
-            <div  id="petDesplay" class="w-9/11 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+            <div  id="petDesplay" class="w-9/11 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+               <div id="petLoader" class="text-center my-5">
+                  <p class="text-xl font-semibold">Loading pets...</p>
+                </div>
+            </div>
             <!-- ///////////favourite pets \\\\\\\\\\\\\\\\-->
-            <div id="favourites_pet" class="border border-[#e7e7e7] rounded-xl w-3/11 flex justify-center
-            "></div>
+             <div class="border border-[#f0f0f0] rounded-xl w-3/11 overflow-y-auto">
+               <div id="favourites_pet" class=" h-1 grid grid-cols-1 md:grid-cols-2"></div>
+             </div>
         </div>
 
      </main>

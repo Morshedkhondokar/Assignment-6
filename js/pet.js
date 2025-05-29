@@ -48,8 +48,9 @@ const displayPets = (pets) => {
         <div> 
         <h2 class="font-bold text-[20px]">${pet.pet_name}</h2>
         <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-paw text-2xl"></i> Breed: ${pet.vaccinated_status}</h5>
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-calendar-alt text-2xl"></i> Birth: ${pet.bdate_of_birth} </h5>
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mars text-2xl"></i> Gender: ${pet.gender}</h5> 
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-calendar-alt text-2xl"></i> Birth: ${!pet.date_of_birth ? "No info" : pet.date_of_birth} </h5>
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mercury text-2xl"></i>
+         Gender: ${pet.gender}</h5> 
         <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-dollar-sign text-2xl"></i> Price: ${pet.price}$</h5> 
          </div> 
 
@@ -65,6 +66,7 @@ const displayPets = (pets) => {
     })
 }
 
+// pet details API
 const ShowDetails =(details) => {
     // console.log(details)
     fetch(`https://openapi.programming-hero.com/api/peddy/pet/${details}`)
@@ -74,6 +76,7 @@ const ShowDetails =(details) => {
 
 }
 
+// pet details function 
 const ShowDetailsOnDesplay = (petDetails) =>{
     // console.log(petDetails.pet_details)
     const detailsContainer = document.getElementById("modalContent");
@@ -86,7 +89,7 @@ const ShowDetailsOnDesplay = (petDetails) =>{
         <div> 
             <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-paw text-2xl"></i> Breed: ${petDetails.vaccinated_status}</h5>
         <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-calendar-alt text-2xl"></i> Birth: ${petDetails.bdate_of_birth} </h5>
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mars text-2xl"></i> Gender: ${petDetails.gender}</h5> 
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mercury text-2xl"></i> Gender: ${petDetails.gender}</h5> 
         </div>
 
         <div> 
@@ -122,31 +125,35 @@ const favouritesPets = (data) => {
 
     const favouritesPetsContainer = document.getElementById("favourites_pet")
     const div = document.createElement('div');
-    div.classList = "h-[50px] md:h-[124px]"
+    div.classList = ""
     div.innerHTML = `
-    <div class=" overflow-hidden p-2">
-    <img class="rounded-xl" src="${data.image}"/>
+    <div> 
+    <div class=" h-[60px] md:h-auto overflow-hidden p-2">
+    <img class="rounded-xl h-auto w-full object-cover" src="${data.image}"/>
     </div>
+    </div>  
     `
+    
     favouritesPetsContainer.appendChild(div)
+
 }
 // pets image create end
  
 
 const demo = {
   "status": true,
-  "message": "successfully fetched pet data using id 10",
+  "message": "successfully fetched pet data using id 16",
   "petData": {
-    "petId": 10,
-    "breed": "Labrador Retriever",
-    "category": "Dog",
-    "date_of_birth": "2023-05-15",
-    "price": 1100,
-    "image": "https://i.ibb.co.com/hg9XBJV/pet-10.jpg",
+    "petId": 16,
+    "breed": "English Angora",
+    "category": "Rabbit",
+    "date_of_birth": "2023-08-05",
+    "price": 300,
+    "image": "https://i.ibb.co.com/zZHPJNh/pet-16.jpg",
     "gender": "Female",
-    "pet_details": "This cheerful female Labrador is a playful bundle of joy. Born on May 15, 2023, she loves water and outdoor activities. Fully vaccinated and priced at $1100, she's perfect for families who enjoy active lifestyles.",
-    "vaccinated_status": "Fully",
-    "pet_name": "Daisy"
+    "pet_details": "This fluffy female English Angora rabbit, born on August 5, 2023, is known for her long, luxurious fur. Priced at $300, she's perfect for families who enjoy grooming and cuddling. She is not vaccinated.",
+    "vaccinated_status": "Not",
+    "pet_name": "Snowball"
   }
 }
 
@@ -190,8 +197,7 @@ const show = ( (num)=> {
 
     const activeBtn = document.getElementById(`btn-${num}`)
     activeBtn.classList.add("active")
-    displayPets(data.data)
-})
+        displayPets(data.data)})
 .catch((error)=> console.log(error))
 })
 
