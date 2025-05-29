@@ -35,12 +35,28 @@ const displayPets = (pets) => {
         
     }
 
+    
+
     pets.forEach( (pet)=>{
         // console.log(pet)
 
+        // loading  start
+        const loading = document.getElementById("loading");
+        const likePetsHidden = document.getElementById("likePets");
+        likePetsHidden.classList.add("hidden")
+        petsContainer.classList.add("hidden")
+        loading.classList.remove("hidden")
+        // loading end
+
         const div = document.createElement('div');
         div.classList = 'flex flex-col border border-[#e7e7e7] rounded-xl p-3'
-        div.innerHTML = `
+        setTimeout(()=>{
+             // loading  start
+            petsContainer.classList.remove("hidden")
+            likePetsHidden.classList.remove("hidden")
+            loading.classList.add("hidden")
+            // loading end
+            div.innerHTML = `
         <div class=" rounded-xl overflow-hidden mb-3"> 
         <img src="${pet.image}"/> 
          </div>
@@ -62,6 +78,7 @@ const displayPets = (pets) => {
          <button onclick="ShowDetails(${pet.petId})" class="h-8 btn border text-[#0e7a81] border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white">Details </button>
          </div>
         `
+        },3000)
         petsContainer.appendChild(div)
     })
 }

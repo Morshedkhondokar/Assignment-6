@@ -80,15 +80,13 @@
         </div>
 
         <div  class="flex gap-2 my-10"> 
+          <div id="loading" class="loader hidden mx-auto"></div>
             <!-- show all pets on display -->
             <div  id="petDesplay" class="w-9/11 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-               <div id="petLoader" class="text-center my-5">
-                  <p class="text-xl font-semibold">Loading pets...</p>
-                </div>
+              
             </div>
             <!-- ///////////favourite pets \\\\\\\\\\\\\\\\-->
-             <div class="border border-[#f0f0f0] rounded-xl w-3/11 overflow-y-auto">
+             <div id="likePets" class="border border-[#f0f0f0] rounded-xl w-3/11 overflow-y-auto">
                <div id="favourites_pet" class=" h-1 grid grid-cols-1 md:grid-cols-2"></div>
              </div>
         </div>
