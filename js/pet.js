@@ -241,6 +241,15 @@ const removeClass = () =>{
     }
 }
 
+// * form input emty
+const form = document.getElementById("Form");
+const emailInput = document.getElementById("inputEmail");
+
+form.addEventListener("submit", function(event){
+    event.preventDefault();
+    emailInput.value = "";
+})
+
 
 loadcategoriesBtn()
 loadPets()
