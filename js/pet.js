@@ -7,11 +7,18 @@ const loadcategoriesBtn = ()=> {
 .catch((error)=> console.log(error))
 }
 
-// get the all pets data
+// get the all pets data and descending order
 const loadPets = ()=> {
   fetch('https://openapi.programming-hero.com/api/peddy/pets')
 .then((res) => res.json())
-.then((data) => displayPets(data.pets))
+.then((data) => {
+    // !sort by price working here for all pets descending order 
+    document.getElementById("sortBtn").addEventListener("click",function(){
+        const sorByPrice = data.pets.sort((a,b) => b.price - a.price)
+        displayPets(sorByPrice)
+    })
+    displayPets(data.pets)
+})
 .catch((error)=> console.log(error))
 }
 
@@ -63,11 +70,11 @@ const displayPets = (pets) => {
 
         <div> 
         <h2 class="font-bold text-[20px]">${pet.pet_name}</h2>
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-paw text-2xl"></i> Breed: ${pet.vaccinated_status}</h5>
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-paw text-2xl"></i> Breed: ${!pet.vaccinated_status ? "No info" : pet.vaccinated_status}</h5>
         <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-calendar-alt text-2xl"></i> Birth: ${!pet.date_of_birth ? "No info" : pet.date_of_birth} </h5>
         <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mercury text-2xl"></i>
-         Gender: ${pet.gender}</h5> 
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-dollar-sign text-2xl"></i> Price: ${pet.price}$</h5> 
+         Gender: ${!pet.gender ? "Female" : pet.gender}</h5> 
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-dollar-sign text-2xl"></i> Price: ${!pet.price ? "No info": pet.price}$</h5> 
          </div> 
 
          <div class="border border-[#e7e7e7] my-3"></div>
@@ -115,7 +122,7 @@ const ShowDetails =(details) => {
 
 // pet details function 
 const ShowDetailsOnDesplay = (petDetails) =>{
-    // console.log(petDetails.pet_details)
+    // console.log(petDetails.date_of_birth)
     const detailsContainer = document.getElementById("modalContent");
 
     detailsContainer.innerHTML = `
@@ -124,15 +131,15 @@ const ShowDetailsOnDesplay = (petDetails) =>{
     <h1 class="font-bold text-2xl my-4">${petDetails.pet_name} </h1>
     <div class="md:flex gap-5 mb-5"> 
         <div> 
-            <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-paw text-2xl"></i> Breed: ${petDetails.vaccinated_status}</h5>
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-calendar-alt text-2xl"></i> Birth: ${petDetails.bdate_of_birth} </h5>
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mercury text-2xl"></i> Gender: ${petDetails.gender}</h5> 
+            <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-paw text-2xl"></i> Breed: ${!petDetails.vaccinated_status ? "No info" : petDetails.vaccinated_status}</h5>
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-calendar-alt text-2xl"></i> Birth: ${petDetails.bdate_of_birth ? 'No info' : petDetails.date_of_birth} </h5>
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-mercury text-2xl"></i> Gender: ${!petDetails.gender ?"Fmale" : petDetails.gender}</h5> 
         </div>
 
         <div> 
         <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class=" text-[15px] mr-2 fas fa-syringe text-2xl"></i>
  Gender: ${petDetails.vaccinated_status}</h5> 
-        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-dollar-sign text-2xl"></i> Price: ${petDetails.price}$</h5> 
+        <h5 class="font-bold text-[16px] text-[#5a5a5a]"> <i class="text-[15px] mr-2 fas fa-dollar-sign text-2xl"></i> Price: ${!petDetails.price ? "No info" : petDetails.price}$</h5> 
         </div>
          </div> 
 
@@ -177,25 +184,6 @@ const favouritesPets = (data) => {
 // pets image create end
  
 
-const demo = {
-  "status": true,
-  "message": "successfully fetched pet data using id 16",
-  "petData": {
-    "petId": 16,
-    "breed": "English Angora",
-    "category": "Rabbit",
-    "date_of_birth": "2023-08-05",
-    "price": 300,
-    "image": "https://i.ibb.co.com/zZHPJNh/pet-16.jpg",
-    "gender": "Female",
-    "pet_details": "This fluffy female English Angora rabbit, born on August 5, 2023, is known for her long, luxurious fur. Priced at $300, she's perfect for families who enjoy grooming and cuddling. She is not vaccinated.",
-    "vaccinated_status": "Not",
-    "pet_name": "Snowball"
-  }
-}
-
-
-
 
 // creat display categories btn
 function displayCategories(categories) {
@@ -222,10 +210,10 @@ function displayCategories(categories) {
     });   
 }
 
-// active calss
+// active calss and descending order
 const show = ( (num)=> {
     // alert(num)
-     console.log(num)
+    //  console.log(num)
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${num}`)
 .then((res) => res.json())
 .then((data) => {
@@ -234,6 +222,12 @@ const show = ( (num)=> {
 
     const activeBtn = document.getElementById(`btn-${num}`)
     activeBtn.classList.add("active")
+     //! sort by price working here for category pets descending order 
+    document.getElementById("sortBtn").addEventListener("click",function(){
+        const sorByPrice = data.data.sort((a,b) => b.price - a.price)
+        displayPets(sorByPrice)
+    })
+
         displayPets(data.data)})
 .catch((error)=> console.log(error))
 })
