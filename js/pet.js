@@ -74,14 +74,34 @@ const displayPets = (pets) => {
 
          <div class="flex justify-between">
          <button onclick="petsID(${pet.petId})" class="w-10 h-8 btn border border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white"> <i class="fas fa-thumbs-up text-gray-300 hover:text-white text-[20px]"></i></button>
-         <button class="h-8 btn border text-[#0e7a81] border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white">Adopt</button>
+         <button onclick="CountNumber()" class="h-8 btn border text-[#0e7a81] border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white">Adopt</button>
          <button onclick="ShowDetails(${pet.petId})" class="h-8 btn border text-[#0e7a81] border-[#0e7a81] hover:bg-[#0e7a81] hover:text-white">Details </button>
          </div>
         `
-        },3000)
+        },2000)
         petsContainer.appendChild(div)
     })
 }
+
+// count number for adopt button
+const CountNumber = () => {
+    const countbtn = document.getElementById("countNumber");
+    const countdisplay = document.getElementById("countDisplay")
+    let number = 3;
+
+    countdisplay.innerText = number;
+    const countdown = setInterval(()=>{
+        number--;
+    countdisplay.innerText = number;
+
+        if(number === 1){
+            clearInterval(countdown)
+            countbtn.close()
+        }
+    },1000)
+    countbtn.showModal()
+}
+
 
 // pet details API
 const ShowDetails =(details) => {
